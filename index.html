@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thiệp 3D</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
+
+    .gothic-text {
+      color: #eee;
+      font-family: 'Cinzel', 'Times New Roman', serif;
+      letter-spacing: 1.5px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .hint-text {
+      margin-top: 18px;
+      font-family: 'Cinzel', 'Times New Roman', serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #111;
+      font-family: system-ui, sans-serif;
+    }
+
+    .page {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+    }
+
+.cinematic-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    /* VIGNETTE */
+    radial-gradient(
+      circle at center,
+      rgba(0,0,0,0) 40%,
+      rgba(0,0,0,0.85) 100%
+    ),
+
+    /* TỐI TRÊN + DƯỚI */
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.75) 0%,
+      rgba(0,0,0,0.35) 25%,
+      rgba(0,0,0,0.35) 70%,
+      rgba(0,0,0,0.85) 100%
+    ),
+
+    /* ẢNH GỐC */
+    url("background.jpg") center / cover no-repeat;
+}
+
+
+
+  
+
+    .page.active {
+      display: flex;
+    }
+
+    input {
+      padding: 12px 16px;
+      font-size: 18px;
+      font-family: 'Cinzel', 'Times New Roman', serif;
+      letter-spacing: 1.5px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.6);
+      color: #eee;
+      outline: none;
+      text-align: center;
+      caret-color: #eee;
+    }
+
+    input::placeholder {
+      color: rgba(255,255,255,0.5);
+      font-family: 'Cinzel', 'Times New Roman', serif;
+    }
+
+    .gothic-button {
+      padding: 10px 18px;
+      font-size: 20px;
+      font-family: 'Cinzel', 'Times New Roman', serif;
+      letter-spacing: 2px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      color: #eee;
+    }
+
+    .gothic-button:hover {
+      text-shadow: 0 0 8px rgba(255,255,255,0.7);
+    }
+
+    button:hover {
+      text-shadow: 0 0 6px rgba(255,255,255,0.6);
+    }
+
+    button:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .scene {
+      width: 300px;
+      height: 420px;
+      perspective: 1200px;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+      cursor: grab;
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      border-radius: 0;
+      box-shadow: 0 25px 50px rgba(0,0,0,.25);
+      background: #222;
+    }
+
+    .card-front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      padding: 0;
+    }
+
+    .card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .countdown {
+      margin-top: 20px;
+      font-family: 'Cinzel', 'Times New Roman', serif;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="cinematic-bg"></div>
+
+
+  <!-- PAGE 1: nhập tên -->
+  <div id="inputPage" class="page active">
+    <h2 class="gothic-text">Hỡi lữ khách, ngươi mang danh xưng gì?</h2>
+    <input id="nameInput" placeholder="" />
+    <button class="gothic-button" onclick="startCard()">Mở thiệp</button>
+    <div class="hint-text" id="hintText">Xin hay xung danh bang day du ho ten</div>
+  </div>
+
+  <!-- PAGE 2: thiệp 3D -->
+<div id="cardPage" class="page">
+ <div class="spotify-player-left">
+    <iframe
+      src="https://open.spotify.com/embed/track/6uDBSDI9pDM7C4Gm0hc2hI"
+      width="280"
+      height="80"
+      frameborder="0"
+      allow="encrypted-media">
+    </iframe>
+  </div>
+    <div class="scene">
+      <div id="card" class="card">
+        <div class="card-face card-front">
+          <img id="cardImage" src="0.png" />
+        </div>
+        <div class="card-face card-back">
+          <img id="cardBackImage" src="" />
+          <div id="cardPage" class="page">
+
+  <!-- layout page 2 -->
+  <div class="card-layout">
+
+    <!-- ẢNH TRÁI -->
+    <div class="side-images left">
+      <img src="left1.png" class="side-img">
+      <img src="left2.png" class="side-img">
+    </div>
+
+    <!-- THIỆP -->
+    <div class="scene">
+      ...
+    </div>
+
+    <!-- ẢNH PHẢI -->
+    <div class="side-images right">
+      <img src="right1.png" class="side-img">
+      <img src="right2.png" class="side-img">
+    </div>
+
+  </div>
+
+</div>
+
+        </div>
+      </div>
+    </div>
+    <div id="countdown" class="countdown"></div>
+  </div>
+  
+
+
+  </div>
+
+</div>
+
+  
+  </div>
+
+<script>
+  // BẢN ĐỒ TÊN -> ẢNH THIỆP (hiện tại tất cả đều dùng chung 0.png)
+  
+  const invitationMap = {
+    default: {
+      front: "0.png",
+      back: "0.png"
+    },
+    "lại thị vang": {
+      front: "0.png",
+      back: "19.png"
+    },
+   "nguyễn đức tuyến": {
+      front: "0.png",
+      back: "20.png"
+    },
+    "nguyễn vân ly": {
+      front: "0.png",
+      back: "23.png"
+    },
+    "vương nguyệt nhi": {
+      front: "0.png",
+      back: "22.png"
+    },
+    "phạm trà my": {
+      front: "0.png",
+      back: "21.png"
+  
+    },
+    "Ngô Thị Phương": {
+      front: "0.png",
+      back: "16.png"
+    },
+    "Chíp Ben": {
+      front: "0.png",
+      back: "46.png"
+    },
+      "Đào Xuân Hướng": {
+      front: "0.png",
+      back: "51.png"
+    },
+      "Nguyễn Duy Khánh": {
+      front: "0.png",
+      back: "32.png"
+    },
+      "Trần Thị Mơ": {
+      front: "0.png",
+      back: "17.png"
+    },
+      "Nguyễn Thị Kim Liên": {
+      front: "0.png",
+      back: "18.png"
+    },
+      "Phùng Quang Hưng": {
+      front: "0.png",
+      back: "46.png"
+    },
+      "Tina Tino": {
+      front: "0.png",
+      back: "45.png"
+    },
+      "Nguyễn Văn Nhật": {
+      front: "0.png",
+      back: "27.png"
+    },
+      "Nguyễn Thị Chi": {
+      front: "0.png",
+      back: "28.png"
+    },
+      "Nguyễn Thanh Tâm": {
+      front: "0.png",
+      back: "30.png"
+    },
+      "Nguyễn Hồng Băng": {
+      front: "0.png",
+      back: "29.png"
+    },
+      "Ngô Thị Quỳnh": {
+      front: "0.png",
+      back: "44.png"
+    },
+      "Nguyễn Phương Linh": {
+      front: "0.png",
+      back: "31.png"
+    },
+  
+  };
+
+
+  const inputPage = document.getElementById("inputPage");
+  const cardPage = document.getElementById("cardPage");
+  const card = document.getElementById("card");
+  const cardImage = document.getElementById("cardImage");
+  const cardBackImage = document.getElementById("cardBackImage");
+  
+
+  let isFlipped = false;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
+let currentX = 0;
+let currentY = 0;
+
+  function startCard() {
+    const name = document.getElementById("nameInput").value.trim();
+    const key = name.toLowerCase();
+    const hint = document.getElementById("hintText");
+
+    if (!invitationMap[key]) {
+      hint.textContent = "Danh xung nay khong co trong danh sach duoc moi, hoac lu khach chua nhap dung ho ten";
+      hint.style.color = "rgba(255,120,120,0.7)";
+      return;
+    }
+
+    const data = invitationMap[key];
+
+    cardImage.src = data.front;
+    cardBackImage.src = data.back;
+
+    inputPage.classList.remove("active");("active");
+    cardPage.classList.add("active");
+  }
+
+  card.addEventListener("click", () => {
+  isFlipped = !isFlipped;
+});
+
+card.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  startX = e.clientX;
+  startY = e.clientY;
+  card.style.cursor = "grabbing";
+});
+
+document.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  const dx = e.clientX - startX;
+  const dy = e.clientY - startY;
+
+  currentX = dx;
+  currentY = dy;
+
+  updateTransform(e.clientX, e.clientY);
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+  card.style.cursor = "grab";
+});
+
+card.addEventListener("mousemove", (e) => {
+  if (isDragging) return;
+  updateTransform(e.clientX, e.clientY);
+});
+
+card.addEventListener("mouseleave", () => {
+  if (isDragging) return;
+  card.style.transform = isFlipped
+    ? "rotateY(180deg)"
+    : "rotateY(0deg)";
+});
+
+function updateTransform(mouseX, mouseY) {
+  const rect = card.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+
+  const rotateY = (mouseX - centerX) / 20;
+  const rotateX = -(mouseY - centerY) / 20;
+
+  const flipRotation = isFlipped ? 180 : 0;
+
+  card.style.transform = `
+    translate(${currentX}px, ${currentY}px)
+    rotateY(${flipRotation + rotateY}deg)
+    rotateX(${rotateX}deg)
+  `;
+}
+  // COUNTDOWN TO 08/02/2026
+  const countdownEl = document.getElementById("countdown");
+  const targetDate = new Date("2026-02-08T00:00:00").getTime();
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      countdownEl.textContent = "Ngày định mệnh đã điểm";
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    countdownEl.textContent = `Còn ${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+  }
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+</div> <!-- cardPage -->
+<script src="ki yeu ok.html"></script>
+
+</script>
+
+  
+</div>
+
+
+
+</body>
+</html>
