@@ -180,7 +180,7 @@
     <h2 class="gothic-text">Hỡi lữ khách, ngươi mang danh xưng gì?</h2>
     <input id="nameInput" placeholder="" />
     <button class="gothic-button" onclick="startCard()">Mở thiệp</button>
-    <div class="hint-text" id="hintText">Xin hay xung danh bang day du ho ten</div>
+    <div class="hint-text" id="hintText">PLS TEXT YOUR FULL NAME</div>
   </div>
 
   <!-- PAGE 2: thiệp 3D -->
@@ -271,59 +271,59 @@
       back: "21.png"
   
     },
-    "Ngô Thị Phương": {
+    "ngô thị phương": {
       front: "0.png",
       back: "16.png"
     },
-    "Chíp Ben": {
+    "chíp ben": {
       front: "0.png",
       back: "46.png"
     },
-      "Đào Xuân Hướng": {
+      "đào xuân hướng": {
       front: "0.png",
       back: "51.png"
     },
-      "Nguyễn Duy Khánh": {
+      "nguyễn duy khánh": {
       front: "0.png",
       back: "32.png"
     },
-      "Trần Thị Mơ": {
+      "trần thị mơ": {
       front: "0.png",
       back: "17.png"
     },
-      "Nguyễn Thị Kim Liên": {
+      "nguyễn thị kim liên": {
       front: "0.png",
       back: "18.png"
     },
-      "Phùng Quang Hưng": {
+      "phùng quang hưng": {
       front: "0.png",
       back: "46.png"
     },
-      "Tina Tino": {
+      "tina tino": {
       front: "0.png",
       back: "45.png"
     },
-      "Nguyễn Văn Nhật": {
+      "nguyễn văn nhật": {
       front: "0.png",
       back: "27.png"
     },
-      "Nguyễn Thị Chi": {
+      "nguyễn thị chi": {
       front: "0.png",
       back: "28.png"
     },
-      "Nguyễn Thanh Tâm": {
+      "nguyễn thanh tâm": {
       front: "0.png",
       back: "30.png"
     },
-      "Nguyễn Hồng Băng": {
+      "nguyễn hồng băng": {
       front: "0.png",
       back: "29.png"
     },
-      "Ngô Thị Quỳnh": {
+      "ngô thị quỳnh": {
       front: "0.png",
       back: "44.png"
     },
-      "Nguyễn Phương Linh": {
+      "nguyễn phương linh": {
       front: "0.png",
       back: "31.png"
     },
@@ -351,7 +351,7 @@ let currentY = 0;
     const hint = document.getElementById("hintText");
 
     if (!invitationMap[key]) {
-      hint.textContent = "Danh xung nay khong co trong danh sach duoc moi, hoac lu khach chua nhap dung ho ten";
+      hint.textContent = "Danh xưng này không có trong danh sách được mời, hoặc danh xưng chưa đủ họ tên, yêu cầu nhập full name";
       hint.style.color = "rgba(255,120,120,0.7)";
       return;
     }
