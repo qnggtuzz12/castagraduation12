@@ -6,6 +6,24 @@
   <title>Casta Graduation</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
+   @keyframes textFloat {
+  0% {
+    transform: translateY(0px) rotateZ(-0.4deg);
+  }
+  50% {
+    transform: translateY(-6px) rotateZ(0.4deg);
+  }
+  100% {
+    transform: translateY(0px) rotateZ(-0.4deg);
+  }
+}
+
+.floating-text {
+  display: inline-block; /* BẮT BUỘC */
+  animation: textFloat 5s ease-in-out infinite;
+  transform-origin: center top;
+}
+
     @keyframes floatSwing {
   0% {
     transform: translateY(0px) rotateZ(-1deg);
@@ -193,7 +211,7 @@
 
   <!-- PAGE 1: nhập tên -->
   <div id="inputPage" class="page active">
-    <h2 class="gothic-text">Hỡi lữ khách, ngươi mang danh xưng gì?</h2>
+    <h2 class="gothic-text floating-text">Hỡi lữ khách, ngươi mang danh xưng gì?</h2>
     <input id="nameInput" placeholder="" />
     <button class="gothic-button" onclick="startCard()">Mở thiệp</button>
     <div class="hint-text" id="hintText">PLS TEXT YOUR FULL NAME</div>
@@ -331,7 +349,7 @@
       front: "0.png",
       back: "30.png"
     },
-      "nguyễn hồng băng": {
+      "nguyễn hoài băng": {
       front: "0.png",
       back: "29.png"
     },
