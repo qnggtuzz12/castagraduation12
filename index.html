@@ -6,6 +6,22 @@
   <title>Casta Graduation</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap');
+    @keyframes floatSwing {
+  0% {
+    transform: translateY(0px) rotateZ(-1deg);
+  }
+  50% {
+    transform: translateY(-12px) rotateZ(1deg);
+  }
+  100% {
+    transform: translateY(0px) rotateZ(-1deg);
+  }
+}
+
+.floating-wrapper {
+  animation: floatSwing 6s ease-in-out infinite;
+  transform-origin: center top;
+}
 
     .gothic-text {
       color: #eee;
@@ -194,7 +210,7 @@
       allow="encrypted-media">
     </iframe>
   </div>
-    <div class="scene">
+    <div class="scene floating-wrapper">
       <div id="card" class="card">
         <div class="card-face card-front">
           <img id="cardImage" src="0.png" />
